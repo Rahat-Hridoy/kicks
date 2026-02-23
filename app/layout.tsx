@@ -12,6 +12,9 @@ export const metadata: Metadata = {
   description: "Explore the world of kicks",
 };
 
+import { Footer } from "@/components/layout/Footer";
+import { Navbar } from "@/components/layout/Navbar";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -19,7 +22,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${rubik.variable} antialiased`}>{children}</body>
+      <body className={`${rubik.variable} antialiased`}>
+        <Navbar />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

@@ -6,17 +6,19 @@
 
 @theme inline {
   --font-rubik: var(--font-rubik);
-  --color-primary: #232321;
-  --color-secondary: #FFA52F;
-  --color-foreground: #232321;
-  --color-background: #E7E7E3;
-  --color-light-background: #FFFFFF;
-  --color-dark-background: #232321;
-  --color-accent: #4A69E2;
-  --color-accent-foreground: #FFFFFF;
-  --color-card-bg-primary: #FAFAFA;
-  --color-card-bg-secondary: #ECEEF0;
-  --color-card-bg-tertiary: #F6F6F6;
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --color-light-text: var(--light-text);
+  --color-dark-text: var(--dark-text);
+  --color-light-background: var(--light-background);
+  --color-dark-background: var(--dark-background);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-card-bg-primary: var(--card-bg-primary);
+  --color-card-bg-secondary: var(--card-bg-secondary);
+  --color-card-bg-tertiary: var(--card-bg-tertiary);
 }
 
 
@@ -26,6 +28,8 @@
   --secondary: #FFA52F;
   --foreground: #232321;
   --background: #E7E7E3;
+  --light-text: #E7E7E3;
+  --dark-text: #232321;
   --light-background: #FFFFFF;
   --dark-background: #232321;
   --accent: #4A69E2;
@@ -49,10 +53,9 @@
 
     }
   body {
-    @apply font-rubik;
-  
-
-    }
+    @apply font-rubik bg-background;
+    @apply max-w-[375px] md:max-w-none mx-auto overflow-x-hidden md:overflow-x-visible;
+  }
   button,a,input{
     @apply cursor-pointer;
   }

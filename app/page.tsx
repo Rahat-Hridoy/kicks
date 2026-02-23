@@ -1,9 +1,15 @@
-import React from "react";
+import { Hero } from "@/app/(home)/components/Hero";
+import { NewDrops } from "@/app/(home)/components/NewDrops";
+import { Categories } from "@/app/(home)/components/Categories";
+import { Reviews } from "@/app/(home)/components/Reviews";
 
 const page = () => {
   return (
     <main>
-      <h1 className="text-3xl font-bold underline text-secondary">Home</h1>
+      <Hero />
+      <NewDrops />
+      <Categories />
+      <Reviews />
     </main>
   );
 };
