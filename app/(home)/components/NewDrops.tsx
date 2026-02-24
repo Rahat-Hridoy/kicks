@@ -1,43 +1,69 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import axios from "axios";
 
-const products = [
-  {
-    id: 1,
-    name: "ADIDAS 4DFWD X PARLEY RUNNING SHOES",
-    price: 125,
-    image: "/image/newDropImage1.png",
-    isNew: true,
-    discount: null,
-  },
-  {
-    id: 2,
-    name: "ADIDAS 4DFWD X PARLEY RUNNING SHOES",
-    price: 125,
-    image: "/image/newDropImage2.png",
-    isNew: false,
-    discount: "10% off",
-  },
-  {
-    id: 3,
-    name: "ADIDAS 4DFWD X PARLEY RUNNING SHOES",
-    price: 125,
-    image: "/image/newDropImage3.png",
-    isNew: true,
-    discount: null,
-  },
-  {
-    id: 4,
-    name: "ADIDAS 4DFWD X PARLEY RUNNING SHOES",
-    price: 125,
-    image: "/image/newDropImage4.png",
-    isNew: true,
-    discount: null,
-  },
-];
+// const products = [
+//   {
+//     id: 1,
+//     name: "ADIDAS 4DFWD X PARLEY RUNNING SHOES",
+//     price: 125,
+//     image: "/image/newDropImage1.png",
+//     isNew: true,
+//     discount: null,
+//   },
+//   {
+//     id: 2,
+//     name: "ADIDAS 4DFWD X PARLEY RUNNING SHOES",
+//     price: 125,
+//     image: "/image/newDropImage2.png",
+//     isNew: false,
+//     discount: "10% off",
+//   },
+//   {
+//     id: 3,
+//     name: "ADIDAS 4DFWD X PARLEY RUNNING SHOES",
+//     price: 125,
+//     image: "/image/newDropImage3.png",
+//     isNew: true,
+//     discount: null,
+//   },
+//   {
+//     id: 4,
+//     name: "ADIDAS 4DFWD X PARLEY RUNNING SHOES",
+//     price: 125,
+//     image: "/image/newDropImage4.png",
+//     isNew: true,
+//     discount: null,
+//   },
+// ];
 
 export function NewDrops() {
+  const [products, setProducts] = useState([]);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchProducts() {
+      try {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL_PRODUCT}/products`,
+        );
+        console.log(response.data);
+        setProducts(response.data);
+      } catch (error) {
+        setError("Failed to load products");
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchProducts();
+  }, []);
+
+  
+
   return (
     <section className="px-4 py-6 md:pt-[90px] md:pb-[128px] ">
       <div className="mx-auto max-w-[1320px] w-full">
@@ -83,12 +109,12 @@ export function NewDrops() {
               </div>
 
               {/* Product Info */}
-              <h3 className="text-base md:text-2xl font-semibold uppercase text-dark-text md:mb-4 leading-snug">
-                {product.name}
+              <h3 className="text-base md:text-2xl font-semibold uppercase text-dark-text mb-auto leading-snug">
+                {product.title}
               </h3>
 
               {/* Action Button */}
-              <button className="w-full bg-primary hover:bg-primary/90 transition-colors text-accent-foreground rounded-lg md:rounded-[8px] tracking-[0.25px] flex items-center justify-center gap-1 uppercase whitespace-nowrap text-xs md:text-sm font-medium mt-0.5 py-[13px] md:py-[16px]">
+              <button className="w-full bg-primary hover:bg-primary/90 transition-colors text-accent-foreground rounded-lg md:rounded-[8px] tracking-[0.25px] flex items-center justify-center gap-1 uppercase whitespace-nowrap text-xs md:text-sm font-medium py-[13px] md:py-[16px] mt-1">
                 <span>VIEW PRODUCT -</span>
                 <span className="text-secondary">${product.price}</span>
               </button>
