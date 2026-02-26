@@ -40,8 +40,18 @@ import axios from "axios";
 //   },
 // ];
 
+interface Product {
+  id: string | number;
+  name?: string;
+  title?: string;
+  price: number;
+  image: string;
+  isNew?: boolean;
+  discount?: string | null;
+}
+
 export function NewDrops() {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
 
@@ -61,8 +71,6 @@ export function NewDrops() {
     }
     fetchProducts();
   }, []);
-
-  
 
   return (
     <section className="px-4 py-6 md:pt-[90px] md:pb-[128px] ">
@@ -100,7 +108,7 @@ export function NewDrops() {
                   <div className="relative w-full h-full transform group-hover:scale-105 transition-transform duration-300">
                     <Image
                       src={product.image}
-                      alt={product.name}
+                      alt={product.name || product.title || "Product"}
                       fill
                       className="object-cover"
                     />
@@ -110,7 +118,7 @@ export function NewDrops() {
 
               {/* Product Info */}
               <h3 className="text-base md:text-2xl font-semibold uppercase text-dark-text mb-auto leading-snug">
-                {product.title}
+                {product.title || product.name}
               </h3>
 
               {/* Action Button */}
