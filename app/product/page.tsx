@@ -1,11 +1,11 @@
 import React from "react";
-import ProductDetail from "@/app/product/components/productDetail";
+import ProductDetail from "@/app/product/components/[id]/page";
 import { RelatedProducts } from "./components/relatedProduct";
 
 const page = () => {
   return (
     <main>
-      <ProductDetail />
+      <ProductDetail id="" />
       <RelatedProducts />
     </main>
   );

@@ -30,7 +30,7 @@ const productImages = [
   },
 ];
 
-export default function ProductPage() {
+export default function ProductPage({ id }: { id: string }) {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
   return (

@@ -5,41 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
 
-// const products = [
-//   {
-//     id: 1,
-//     name: "ADIDAS 4DFWD X PARLEY RUNNING SHOES",
-//     price: 125,
-//     image: "/image/newDropImage1.png",
-//     isNew: true,
-//     discount: null,
-//   },
-//   {
-//     id: 2,
-//     name: "ADIDAS 4DFWD X PARLEY RUNNING SHOES",
-//     price: 125,
-//     image: "/image/newDropImage2.png",
-//     isNew: false,
-//     discount: "10% off",
-//   },
-//   {
-//     id: 3,
-//     name: "ADIDAS 4DFWD X PARLEY RUNNING SHOES",
-//     price: 125,
-//     image: "/image/newDropImage3.png",
-//     isNew: true,
-//     discount: null,
-//   },
-//   {
-//     id: 4,
-//     name: "ADIDAS 4DFWD X PARLEY RUNNING SHOES",
-//     price: 125,
-//     image: "/image/newDropImage4.png",
-//     isNew: true,
-//     discount: null,
-//   },
-// ];
-
 interface Product {
   id: string | number;
   name?: string;
@@ -51,6 +16,7 @@ interface Product {
 }
 
 export function NewDrops() {
+  const [showAll, setShowAll] = useState(false);
   const [products, setProducts] = useState<Product[]>([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
@@ -59,7 +25,7 @@ export function NewDrops() {
     async function fetchProducts() {
       try {
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL_PRODUCT}/products`,
+          `${process.env.NEXT_PUBLIC_API_URL}/products`,
         );
         console.log(response.data);
         setProducts(response.data);
@@ -80,17 +46,17 @@ export function NewDrops() {
           <h2 className="max-w-[172px] md:max-w-[590px] text-2xl md:text-[74px] font-semibold tracking-tight leading-1.2 md:leading-none text-primary md:uppercase">
             Don't miss out new drops
           </h2>
-          <Link
-            href="/new-drops"
-            className="bg-accent hover:bg-accent/90 transition-colors text-accent-foreground font-medium text-sm px-4 py-3 md:px-8 md:py-4 rounded md:rounded-lg whitespace-nowrap"
+          <button
+            onClick={() => setShowAll(!showAll)}
+            className="bg-accent hover:bg-accent/90 transition-colors text-accent-foreground font-medium text-sm px-4 py-3 md:px-8 md:py-4 rounded md:rounded-lg whitespace-nowrap uppercase"
           >
-            SHOP NEW DROPS
-          </Link>
+            {showAll ? "SHOW LESS" : "SHOP NEW DROPS"}
+          </button>
         </div>
 
         {/* Product Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-6 md:gap-4">
-          {products.map((product) => (
+          {(showAll ? products : products.slice(0, 4)).map((product) => (
             <div key={product.id} className="flex flex-col group">
               {/* Image Card */}
               <div className="bg-card-bg-primary p-2 relative rounded-[28px] mb-4">
