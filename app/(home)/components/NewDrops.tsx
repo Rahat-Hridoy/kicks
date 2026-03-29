@@ -57,7 +57,11 @@ export function NewDrops() {
         {/* Product Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-6 md:gap-4">
           {(showAll ? products : products.slice(0, 4)).map((product) => (
-            <div key={product.id} className="flex flex-col group">
+            <Link
+              href={`/product/${product.id}`}
+              key={product.id}
+              className="flex flex-col group"
+            >
               {/* Image Card */}
               <div className="bg-card-bg-primary p-2 relative rounded-[28px] mb-4">
                 <div className="relative aspect-square w-full rounded-2xl md:rounded-[24px] bg-card-bg-secondary p-4 md:p-8 flex items-center justify-center">
@@ -92,7 +96,7 @@ export function NewDrops() {
                 <span>VIEW PRODUCT -</span>
                 <span className="text-secondary">${product.price}</span>
               </button>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
